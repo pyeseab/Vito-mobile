@@ -25,3 +25,27 @@ export async function signup(
     { method: "POST" }
   );
 }
+
+
+OR:
+const API_URL = "http://localhost:5000"; // or your backend IP
+
+export async function signup(
+  username: string,
+  password: string,
+  email: string
+) {
+  const res = await fetch(`${API_URL}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password, email }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Signup failed");
+  }
+
+  return res.json();
+}
