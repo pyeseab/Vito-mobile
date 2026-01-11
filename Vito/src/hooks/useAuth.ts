@@ -1,7 +1,22 @@
 import { useState } from "react";
 
-export function useAuth() {
-  const [user, setUser] = useState(null);
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  // add more as needed
+}
 
-  return { user, setUser };
+export function useAuth() {
+  const [user, setUser] = useState<User | null>(null);
+
+  function login(userData: User) {
+    setUser(userData);
+  }
+
+  function logout() {
+    setUser(null);
+  }
+
+  return { user, login, logout, setUser };
 }
